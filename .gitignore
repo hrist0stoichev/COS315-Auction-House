@@ -26,6 +26,7 @@ target/
 .project
 .settings
 .springBeans
+src/main/resources/application.properties
 
 ### IntelliJ IDEA ###
 .idea
