@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Success</title>
+    <style>
+        body{
+            background-image: url("bidtable.jpg");
+            font-size: x-large;
+            color: darkred;
+            font-style: italic;
+            font-weight: bold;
+
+        }
+        a{
+            font-size: xx-large;
+        }
+    </style>
+</head>
+<body>
+
+<p th:text="${username+' welcome to our Auction House!'}"></p>
+<p>Please log in to start bidding.</p>
+<a th:href="@{/bid/login}">Log In</a>
+</body>
+</html>

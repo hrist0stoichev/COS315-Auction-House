@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Register</title>
+    <style>
+        body{background-color: beige;}
+        label { display: inline-block; width: 210px; text-align: right;
+        color:darkred;}
+    </style>
+</head>
+<body>
+
+<h1>Sign up</h1>
+
+<img th:src="@{/bid.jpg}"/>
+
+<form th:method="post">
+    <p>Choose your log-in credentials</p>
+
+    <label>Username</label>
+    <input th:type="text" name="username" th:required="true"/> <br/> <br/>
+    <label>Password</label>
+    <input th:type="password" name="password" th:required="true"/> <br/> <br/>
+
+    <p>Enter your personal details</p>
+    <label>First Name</label>
+    <input th:type="text" name="first_name" th:required="true"/> <br/> <br/>
+    <label>Last Name</label>
+    <input th:type="text" name="last_name" th:required="true"/> <br/> <br/>
+    <label>Email</label>
+    <input th:type="text" name="email" th:required="true"/> <br/> <br/>
+    <label>Telephone Number</label>
+    <input th:type="text" name="telephone_number" th:required="true"/> <br/> <br/>
+
+    <p>Enter your address</p>
+    <label>Country</label>
+    <input th:type="text" name="country" th:required="true"/> <br/> <br/>
+    <label>City</label>
+    <input th:type="text" name="city" th:required="true"/> <br/> <br/>
+    <label>Street</label>
+    <input th:type="text" name="street" th:required="true"/> <br/> <br/>
+
+    <p>Enter your credit card details</p>
+    <label>Credit Card Type</label>
+    <input th:type="text" name="card_type" th:required="true"/>
+    <label>Credit Card Number</label>
+    <input th:type="text" name="card_number" th:required="true"/> <br/> <br/>
+
+    <input th:type="submit"/>
+
+
+</form>
+
+</body>
+</html>
