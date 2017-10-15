@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Log In</title>
+    <style>
+        body{
+            background-color: aqua;
+            color: brown;
+        }
+
+    </style>
+</head>
+<body>
+<img th:src="@{/loginbidjpg.jpg}"/>
+<h1>Log In to Start Bidding</h1>
+<form th:method="post">
+    <label>Username</label>
+    <input th:type="text" name="username"/> <br/> <br/>
+
+    <label>Password</label>
+    <input th:type="password" name="password"/> <br/> <br/>
+
+    <input th:type="submit"/>
+
+</form>
+</body>
+</html>
