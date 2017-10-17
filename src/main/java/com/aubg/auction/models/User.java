@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +26,6 @@ public class User {
 
     @Column(name="telephone_number")
     private String telephoneNumber;
-
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="address_id",unique = true)
@@ -112,10 +110,26 @@ public class User {
     }
 
     public String getTelephoneNumber() {
-        return telephoneNumber;
+        return this.telephoneNumber;
     }
 
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public String getCreditCardType() {
+        return this.creditCardType;
+    }
+
+    public void setCreditCardType(String creditCardType) {
+        this.creditCardType = creditCardType;
+    }
+
+    public String getCreditCardNumber() {
+        return this.creditCardNumber;
+    }
+
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
     }
 }
