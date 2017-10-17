@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="address")
 public class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +17,6 @@ public class Address {
 
     @Column(nullable=false)
     private String street;
-
 
     public Address(String country, String city, String street) {
         this.country = country;
