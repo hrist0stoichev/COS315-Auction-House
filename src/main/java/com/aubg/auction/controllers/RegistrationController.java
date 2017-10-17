@@ -1,8 +1,8 @@
 package com.aubg.auction.controllers;
 
-import com.aubg.auction.services.impl.RegistrationService;
 import com.aubg.auction.models.User;
 import com.aubg.auction.models.Address;
+import com.aubg.auction.services.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

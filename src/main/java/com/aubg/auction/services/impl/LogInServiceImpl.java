@@ -1,42 +1,37 @@
 package com.aubg.auction.services.impl;
-
+import com.aubg.auction.models.User;
 import com.aubg.auction.dao.UserDAO;
+import com.aubg.auction.services.LogInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.aubg.auction.models.User;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Transactional
-public class RegistrationService {
+public class LogInServiceImpl implements LogInService {
 
     private final UserDAO userDAO;
 
     @Autowired
-    public RegistrationService(UserDAO userDAO) {
+    public LogInServiceImpl(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
-    public boolean exists(User user){
+    public boolean isRegistered(User user){
 
         List<User> users = userDAO.findAll();
+        for(User u :users){
 
-
-        for(User u:users){
-            if(user.getUsername().equals(u.getUsername())){
-
+            if(u.getUsername().equals(user.getUsername())&&u.getPassword().equals(user.getPassword())){
                 return true;
-
             }
+
+
         }
 
         return false;
-    }
 
-    public void create(User user){
-
-        userDAO.save(user);
     }
 }
