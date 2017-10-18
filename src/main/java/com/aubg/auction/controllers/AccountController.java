@@ -18,28 +18,27 @@ public class AccountController {
     }
 
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "register";
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "loginform";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") User user){
-        if(accountService.existUsername(user.getUsername())){
+    public String register(@ModelAttribute("user") User user) {
+        if (accountService.existUsername(user.getUsername())) {
             return "usernameexists";
         }
-
         accountService.createUser(user);
         return "successRegister";
     }
 
     @PostMapping("/login")
-    public String login(Model model, @RequestParam(name="username")String username,
-                        @RequestParam(name="password")String password){
+    public String login(Model model, @RequestParam(name = "username") String username,
+                        @RequestParam(name = "password") String password) {
 
         User user = this.accountService.getUserByUsername(username);
 
@@ -47,7 +46,7 @@ public class AccountController {
             return "errorlogin";
         }
 
-        model.addAttribute("username",username);
+        model.addAttribute("username", username);
         model.addAttribute("currentUserId", user.getId());
         return "biddingpage";
     }

@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
         return this.getUserByUsername(username) != null;
     }
 
-    public void createUser(User user){
+    public void createUser(User user) {
         userDAO.save(user);
     }
 

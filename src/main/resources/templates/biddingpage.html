@@ -6,8 +6,10 @@
     <title>Bidding</title>
 </head>
 <body>
-<p th:text="${'Hello, '+username}"></p>
+<p th:text="${'Hello, ' + username}"></p>
 <p>You can start bidding</p>
-
+<form th:method="post">
+    <input th:value="${'Current Auctions'}" th:type="submit" th:name="categorysearch"/>
+</form>
 </body>
 </html>
