@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @Controller
 @SessionAttributes("currentUserId")
 public class AccountController {
@@ -39,7 +41,6 @@ public class AccountController {
     @PostMapping("/login")
     public String login(Model model, @RequestParam(name = "username") String username,
                         @RequestParam(name = "password") String password) {
-
         User user = this.accountService.getUserByUsername(username);
 
         if (!this.accountService.isPasswordCorrect(user, password)) {
@@ -55,5 +56,17 @@ public class AccountController {
     public String logout(Model model) {
         model.addAttribute("currentUserId", -1);
         return "loginform";
+    }
+
+    @GetMapping("/asd")
+    public String asd(Model model) {
+
+        String currentUserId = model.asMap().getOrDefault("currentUserId", "-1").toString();
+
+        if(Objects.equals(currentUserId, "-1")) {
+            return "errorlogin";
+        }
+
+        return "successRegister";
     }
 }

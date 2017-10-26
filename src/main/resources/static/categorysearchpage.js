@@ -5,7 +5,7 @@ window.onload = function() {
         list.innerHTML = '';
         auctions.forEach(function (auction) {
             var listItem = document.createElement("LI");
-            var listText = document.createTextNode(auction.name);
+            var listText = document.createTextNode(auction.name + " (" + auction.category + ")");
             listItem.appendChild(listText);
             list.appendChild(listItem);
         });
@@ -20,7 +20,7 @@ function searchCategory() {
         list.innerHTML = '';
         auctions.forEach(function (auction) {
             var listItem = document.createElement("LI");
-            var listText = document.createTextNode(auction.name);
+            var listText = document.createTextNode(auction.name + " (" + auction.category + ")");
             listItem.appendChild(listText);
             list.appendChild(listItem);
         });
