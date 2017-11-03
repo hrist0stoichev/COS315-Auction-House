@@ -12,6 +12,9 @@ public class User {
     @Column(name="username",unique = true)
     private String username;
 
+    @Column(name="is_admin",nullable = false)
+    private boolean isAdmin;
+
     @Column(nullable = false)
     private String password;
 
@@ -40,15 +43,18 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String firstName,
-                String lastName, String email,
-                String telephoneNumber, String creditCardType, String creditCardNumber) {
+    public User(String username, boolean isAdmin, String password,
+                String firstName, String lastName, String email,
+                String telephoneNumber, Address address,
+                String creditCardType, String creditCardNumber) {
         this.username = username;
+        this.isAdmin = isAdmin;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.telephoneNumber = telephoneNumber;
+        this.address = address;
         this.creditCardType = creditCardType;
         this.creditCardNumber = creditCardNumber;
     }
@@ -59,6 +65,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public String getPassword() {

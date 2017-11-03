@@ -3,12 +3,15 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Catalog</title>
+    <title>Error Adding</title>
 </head>
 <body>
 
-<form th:method="post">
-    <input th:value="${'Current Auctions'}" th:type="submit" th:name="categorysearch"/>
-</form>
+<p>The selected category does not exist. Add it or choose an existing one.</p>
+
+<br/> <br/>
+
+<a th:href="@{/addAuction}">Add Auction</a>
+
 </body>
 </html>

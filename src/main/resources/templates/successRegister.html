@@ -6,7 +6,7 @@
     <title>Success</title>
     <style>
         body{
-            background-image: url("bidtable.jpg");
+            background-color: bisque;
             font-size: x-large;
             color: darkred;
             font-style: italic;
@@ -22,6 +22,7 @@
 
 <p th:text="${user.username+' welcome to our Auction House!'}"></p>
 <p>Please log in to start bidding.</p>
+<img th:src="@{/bidtable.jpg}"/>
 <a th:href="@{/login}">Log In</a>
 </body>
 </html>
