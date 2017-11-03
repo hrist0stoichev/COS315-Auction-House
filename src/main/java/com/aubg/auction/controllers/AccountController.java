@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
-import java.util.Objects;
 
 @Controller
-@SessionAttributes("currentUserId")
+@SessionAttributes({"currentUserId","isAdmin"})
 public class AccountController {
     private final AccountService accountService;
 
@@ -25,7 +25,8 @@ public class AccountController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login()  {
+
         return "loginform";
     }
 
@@ -51,14 +52,33 @@ public class AccountController {
 
         model.addAttribute("username", username);
         model.addAttribute("currentUserId", user.getId());
+        if(user.isAdmin()){
+            model.addAttribute("isAdmin",1);
+            return "redirect:/admin";
+
+        }
 
 
         return "biddingpage";
     }
 
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        model.addAttribute("currentUserId", -1);
-        return "loginform";
+    @GetMapping("/admin")
+    public String adminOptions(Model model){
+
+        if(model.containsAttribute("isAdmin")){
+            return "adminPage";
+        }
+
+        return "errorNotAuthorized";
     }
+
+    @GetMapping("/logout")
+    public String logout(Model model,SessionStatus status) {
+
+        status.setComplete();
+
+        return "redirect:/login";
+    }
+
+
 }

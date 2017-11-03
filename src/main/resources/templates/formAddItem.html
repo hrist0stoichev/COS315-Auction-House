@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <style>
+        body{
+            background-color: beige;
+        }
+    </style>
+
+    <title>Add Auction</title>
+</head>
+<body>
+<form th:method="post">
+
+    <label>Name</label>
+    <input th:type="text" name="name"/>
+    <br/><br/>
+
+
+
+    <label>Price</label>
+    <input th:type="text" name="price"/>
+    <br/> <br/>
+
+    <label>Start Date</label>
+    <input th:type="date" name="startDate"/>
+    <br/> <br/>
+
+    <label>End Date</label>
+    <input th:type="date" name="endDate"/>
+    <br/> <br/>
+
+
+
+    <label>Image</label>
+    <input th:type="file" name="image" accept="image/*"/>
+
+    <br/><br/>
+
+    <label>Category Name</label>
+    <input th:type="text" name="category_name"/>
+
+    <br/> <br/>
+    <input th:type="submit" value="Add"/>
+
+
+
+</form>
+</body>
+</html>
