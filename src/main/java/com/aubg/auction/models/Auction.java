@@ -1,5 +1,7 @@
 package com.aubg.auction.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,27 +15,31 @@ public class Auction {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String category;
 
     @Column(nullable = false)
     private Long price;
 
     @Column(nullable = true)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
 
     @Column(nullable = true)
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
+
+    @Basic
+    @Lob
+    private byte[]image;
 
     public Auction() {
     }
 
-    public Auction(String name, String category, Long price, Date startDate, Date endDate) {
+    public Auction(String name, Long price, Date startDate, Date endDate, byte[] image) {
         this.name = name;
-        this.category = category;
         this.price = price;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.image = image;
     }
 
     public Long getId() {
@@ -76,12 +82,14 @@ public class Auction {
         this.endDate = endDate;
     }
 
-    public String getCategory() {
-        return category;
+
+
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
 

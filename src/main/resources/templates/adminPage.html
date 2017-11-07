@@ -3,9 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Bidding</title>
-
     <style>
+        body{
+            background-color: beige;
+        }
+
+        h1{
+            color: darkgoldenrod;
+        }
         #a{
             position: absolute;
             top:0px;
@@ -16,16 +21,20 @@
         }
     </style>
 
+    <title>Admin</title>
 </head>
 <body>
-<p th:text="${'Hello, ' + username}"></p>
-<p>You can start bidding</p>
-<form th:method="post">
-    <input th:value="${'Current Auctions'}" th:type="submit" th:name="categorysearch"/>
-</form>
+
+<h1>Hello,admin</h1>
+<p>Choose what you want to do.</p>
+<br/> <br/>
+
+<a th:href="@{/addAuction}">Add Auction</a>
 
 <div id="a">
-<a th:href="@{/logout}">Log out</a>
+    <a th:href="@{/logout}">Log out</a>
 </div>
+
+
 </body>
 </html>
