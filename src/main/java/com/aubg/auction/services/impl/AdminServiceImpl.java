@@ -13,10 +13,8 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class AdminServiceImpl implements AdminService {
-     private final AuctionDao auctionDao;
-     private final CategoryDAO categoryDAO;
-
-
+    private final AuctionDao auctionDao;
+    private final CategoryDAO categoryDAO;
 
     @Autowired
     public AdminServiceImpl(AuctionDao auctionDao, CategoryDAO categoryDAO) {
@@ -25,12 +23,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addNewItem(Auction auction,String categoryName) {
-
+    public void addNewItem(Auction auction, String categoryName) {
         Category category = categoryDAO.getCategoryByName(categoryName);
         auctionDao.save(auction);
         category.getAuctions().add(auction);
-
-
     }
 }

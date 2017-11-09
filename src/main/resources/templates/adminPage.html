@@ -1,40 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <style>
-        body{
-            background-color: beige;
-        }
+	<meta charset="UTF-8"/>
+	<style>
+		body {
+			background-color: beige;
+		}
 
-        h1{
-            color: darkgoldenrod;
-        }
-        #a{
-            position: absolute;
-            top:0px;
-            right:10px;
-            font-size: 120%;
+		h1 {
+			color: darkgoldenrod;
+		}
 
+		#a {
+			position: absolute;
+			top: 0px;
+			right: 10px;
+			font-size: 120%;
+		}
+	</style>
 
-        }
-    </style>
-
-    <title>Admin</title>
+	<title>Admin</title>
 </head>
 <body>
+	<h1>Hello,admin</h1>
+	<p>Choose what you want to do.</p>
+	<br/> <br/>
 
-<h1>Hello,admin</h1>
-<p>Choose what you want to do.</p>
-<br/> <br/>
+	<a th:href="@{/addAuction}">Add Auction</a>
 
-<a th:href="@{/addAuction}">Add Auction</a>
-
-<div id="a">
-    <a th:href="@{/logout}">Log out</a>
-</div>
-
-
+	<div id="a">
+		<a th:href="@{/logout}">Log out</a>
+	</div>
 </body>
 </html>
