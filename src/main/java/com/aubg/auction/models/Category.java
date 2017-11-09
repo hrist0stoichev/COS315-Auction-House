@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String name;
 
     @OneToMany
@@ -20,19 +20,13 @@ public class Category {
     private Set<Auction> auctions;
 
     public Category() {
-
-        this.auctions=new HashSet<>();
+        this.auctions = new HashSet<>();
     }
 
     public Category(String name, Set<Auction> auctions) {
-
-
         this.name = name;
         this.auctions = auctions;
     }
-
-
-
 
     public Long getId() {
         return id;

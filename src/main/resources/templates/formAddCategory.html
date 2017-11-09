@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8"/>
+	<style>
+		body {
+			background-color: beige;
+		}
+	</style>
+
+	<title>Add Category</title>
+</head>
+<body>
+	<form th:method="post">
+		<label>Category Name</label>
+		<input th:type="text" name="category_name"/>
+		<br/><br/>
+
+		<input th:type="submit" value="Add"/>
+	</form>
+</body>
+</html>

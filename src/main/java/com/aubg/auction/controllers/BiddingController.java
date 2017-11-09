@@ -15,6 +15,6 @@ public class BiddingController {
 
     @PostMapping(path = {"/login"}, params = {"categorysearch"})
     public String redirectToCategorySearch() {
-        return "categorysearchpage";
+        return "auctionspage";
     }
 }
