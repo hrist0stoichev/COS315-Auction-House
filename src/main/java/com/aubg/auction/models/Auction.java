@@ -15,7 +15,6 @@ public class Auction {
     @Column(nullable = false)
     private String name;
 
-
     @Column(nullable = false)
     private Long price;
 
@@ -29,10 +28,9 @@ public class Auction {
 
     @Basic
     @Lob
-    private byte[]image;
+    private byte[] image;
 
-    public Auction() {
-    }
+    public Auction() {}
 
     public Auction(String name, Long price, Date startDate, Date endDate, byte[] image) {
         this.name = name;
@@ -81,8 +79,6 @@ public class Auction {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-
 
     public byte[] getImage() {
         return image;
