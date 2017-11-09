@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Category Search:</title>
+</head>
+<body>
+	<label>Category:</label>
+	<input th:type="text" name="category" id="categoryInput"/> <br/> <br/>
+	<button onclick="searchCategory()">Search</button>
+
+	<ul id="auctions">
+
+	</ul>
+
+	<script th:src="@{/auctionspage.js}"></script>
+</body>
+</html>

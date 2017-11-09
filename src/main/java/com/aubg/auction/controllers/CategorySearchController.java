@@ -1,6 +1,8 @@
 package com.aubg.auction.controllers;
 
+import com.aubg.auction.dao.CategoryDAO;
 import com.aubg.auction.models.Auction;
+import com.aubg.auction.models.Category;
 import com.aubg.auction.services.AccountService;
 import com.aubg.auction.services.CategorySearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,13 @@ import java.util.Set;
 @SessionAttributes("currentUserId")
 public class CategorySearchController {
     private final CategorySearchService categorySearchService;
+    private final CategoryDAO categoryDAO;
 
 
     @Autowired
-    public CategorySearchController(CategorySearchService categorySearchService) {
+    public CategorySearchController(CategorySearchService categorySearchService, CategoryDAO categoryDAO) {
         this.categorySearchService = categorySearchService;
+        this.categoryDAO = categoryDAO;
     }
 
     @GetMapping(value = "/category/{categoryName}")
@@ -29,18 +33,24 @@ public class CategorySearchController {
     }
 
     @GetMapping("/catalog")
-    public String catalog(Model model){
-        List<Auction> auctions = categorySearchService.getAllAuctions();
-        model.addAttribute("auctions",auctions);
-
-        return "categorysearchpage";
+    public String catalog() {
+        return "auctionspage";
     }
 
-
+    @GetMapping("/categories")
+    public String categories() {
+        return "categoriespage";
+    }
 
     @GetMapping(value = "/category/")
     public @ResponseBody
-    List<Auction> categories() {
+    List<Auction> getAllAuctions() {
         return categorySearchService.getAllAuctions();
+    }
+
+    @GetMapping("/categories/")
+    public @ResponseBody
+    List<Category> getAllCategories() {
+        return categoryDAO.findAll();
     }
 }

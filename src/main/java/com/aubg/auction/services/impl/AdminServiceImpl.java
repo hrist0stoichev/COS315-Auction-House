@@ -28,4 +28,14 @@ public class AdminServiceImpl implements AdminService {
         auctionDao.save(auction);
         category.getAuctions().add(auction);
     }
+
+    @Override
+    public void addNewCategory(Category category) {
+        categoryDAO.save(category);
+    }
+
+    @Override
+    public void deleteAuctionById(long auctionId) {
+        auctionDao.delete(auctionId);
+    }
 }

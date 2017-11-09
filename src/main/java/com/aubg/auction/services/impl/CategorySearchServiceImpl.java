@@ -24,12 +24,9 @@ public class CategorySearchServiceImpl implements CategorySearchService {
         this.categoryDAO = categoryDAO;
     }
 
-
     @Override
     public List<Auction> getAllAuctions() {
-
         return auctionDao.findAll();
-
     }
 
     @Override
@@ -39,9 +36,6 @@ public class CategorySearchServiceImpl implements CategorySearchService {
 
     @Override
     public boolean categoryExists(String name) {
-
-        return categoryDAO.getCategoryByName(name)!=null;
-
-
+        return categoryDAO.getCategoryByName(name) != null;
     }
 }
