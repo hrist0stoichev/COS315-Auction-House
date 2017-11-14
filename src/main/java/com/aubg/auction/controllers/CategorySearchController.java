@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +30,10 @@ public class CategorySearchController {
     @GetMapping(value = "/category/{categoryName}")
     public @ResponseBody
     Set<Auction> categorySearch(@PathVariable String categoryName) {
-        return categorySearchService.getAuctionsByCategory(categoryName);
+        Set<Auction> auctions = categorySearchService.getAuctionsByCategory(categoryName);
+        if (auctions != null) {
+            return auctions;
+        } else return new HashSet<>();
     }
 
     @GetMapping("/catalog")
