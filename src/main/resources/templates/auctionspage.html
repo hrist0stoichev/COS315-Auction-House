@@ -4,15 +4,37 @@
 <head>
 	<meta charset="UTF-8"/>
 	<title>Category Search:</title>
+	<style>
+		#auctions .auction {
+			border: 1px solid black;
+			width: 29%;
+			margin: 1%;
+			display: inline-block;
+			padding: 1%;
+		}
+
+		#auctions .auction img {
+			max-width: 50%;
+			float: left;
+			position: relative;
+		}
+
+		#auctions .auction div {
+			max-width: 50%;
+			float: right;
+			position: relative;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<label>Category:</label>
 	<input th:type="text" name="category" id="categoryInput"/> <br/> <br/>
 	<button onclick="searchCategory()">Search</button>
 
-	<ul id="auctions">
+	<div id="auctions">
 
-	</ul>
+	</div>
 
 	<script th:src="@{/auctionspage.js}"></script>
 </body>
