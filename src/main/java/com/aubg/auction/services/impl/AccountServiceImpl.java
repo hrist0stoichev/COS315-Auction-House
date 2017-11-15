@@ -28,7 +28,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public void createUser(User user) {
-        user.setAdmin(false);
         userDAO.save(user);
     }
 

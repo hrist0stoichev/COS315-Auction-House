@@ -12,7 +12,7 @@ public class User {
     @Column(name="username",unique = true)
     private String username;
 
-    @Column(name="is_admin",nullable = false)
+    @Column(name="isAdmin",nullable = false)
     private boolean isAdmin;
 
     @Column(nullable = false)
@@ -71,8 +71,8 @@ public class User {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getPassword() {
