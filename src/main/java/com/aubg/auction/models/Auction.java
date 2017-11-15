@@ -18,21 +18,20 @@ public class Auction {
     @Column(nullable = false)
     private Long price;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date startDate;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date endDate;
 
-    @Basic
-    @Lob
-    private byte[] image;
+    @Column(nullable = false)
+    private String image;
 
     public Auction() {}
 
-    public Auction(String name, Long price, Date startDate, Date endDate, byte[] image) {
+    public Auction(String name, Long price, Date startDate, Date endDate, String image) {
         this.name = name;
         this.price = price;
         this.startDate = startDate;
@@ -80,11 +79,9 @@ public class Auction {
         this.endDate = endDate;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
+    public String getImage() { return image; }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }
