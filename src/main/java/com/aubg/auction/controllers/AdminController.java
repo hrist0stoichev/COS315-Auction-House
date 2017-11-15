@@ -2,6 +2,8 @@ package com.aubg.auction.controllers;
 
 import com.aubg.auction.models.Auction;
 import com.aubg.auction.models.Category;
+import com.aubg.auction.models.User;
+import com.aubg.auction.services.AccountService;
 import com.aubg.auction.services.AdminService;
 import com.aubg.auction.services.CategorySearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +11,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @SessionAttributes({"currentUserId", "isAdmin"})
 public class AdminController {
 
     private final AdminService adminService;
     private final CategorySearchService categoryService;
+    private final AccountService accountService;
 
     @Autowired
-    public AdminController(AdminService adminService, CategorySearchService categoryService) {
+    public AdminController(AdminService adminService, CategorySearchService categoryService, AccountService accountService) {
         this.adminService = adminService;
         this.categoryService = categoryService;
+        this.accountService = accountService;
     }
 
     @GetMapping("/addAuction")
@@ -80,5 +86,16 @@ public class AdminController {
         category.setName(categoryName);
         adminService.addNewCategory(category);
         return "successAdded";
+    }
+
+    @GetMapping("/allUsers")
+    public String allUsers(Model model) {
+        if (!model.containsAttribute("isAdmin")) {
+            return "errorNotAuthorized";
+        }
+
+        List<User> users = this.accountService.getAllUsers();
+        model.addAttribute("users", users);
+        return "allUsers";
     }
 }
