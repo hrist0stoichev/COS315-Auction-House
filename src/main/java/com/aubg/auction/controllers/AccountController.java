@@ -51,7 +51,7 @@ public class AccountController {
 
         model.addAttribute("username", username);
         model.addAttribute("currentUserId", user.getId());
-        if (user.isAdmin()) {
+        if (user.getIsAdmin()) {
             model.addAttribute("isAdmin", 1);
             return "redirect:/admin";
         }
