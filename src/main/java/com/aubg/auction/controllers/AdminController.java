@@ -98,4 +98,16 @@ public class AdminController {
         model.addAttribute("users", users);
         return "allUsers";
     }
+
+    @GetMapping("/allUsers/{userId}")
+    public String userDetails(Model model, @PathVariable String userId) {
+        if (!model.containsAttribute("isAdmin")) {
+            return "errorNotAuthorized";
+        }
+
+        User user = this.accountService.getUserById(Long.parseLong(userId));
+        model.addAttribute("user", user);
+
+        return "userDetails";
+    }
 }

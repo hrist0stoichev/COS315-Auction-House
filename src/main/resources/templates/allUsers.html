@@ -7,8 +7,10 @@
 </head>
 <body>
 <h1>Users</h1>
-<ul th:each="user : ${users}">
-    <li th:text="${user.username}">Username</li>
+<ul>
+    <li th:each="user : ${users}">
+        <a th:href="@{/allUsers/{id}(id=${user.id})}" th:text="${user.username}">Username</a>
+    </li>
 </ul>
 </body>
 </html>
