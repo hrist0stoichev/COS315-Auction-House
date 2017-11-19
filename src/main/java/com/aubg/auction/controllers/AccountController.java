@@ -10,7 +10,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 
 @Controller
-@SessionAttributes({"currentUserId", "isAdmin"})
+@SessionAttributes({"currentUserId", "isAdmin", "username"})
 public class AccountController {
     private final AccountService accountService;
 
@@ -51,22 +51,22 @@ public class AccountController {
 
         model.addAttribute("username", username);
         model.addAttribute("currentUserId", user.getId());
-        if (user.isAdmin()) {
+        if (user.getIsAdmin()) {
             model.addAttribute("isAdmin", 1);
             return "redirect:/admin";
         }
 
-        return "biddingpage";
+        return "redirect:/catalog";
     }
 
     @GetMapping("/admin")
     public String adminOptions(Model model) {
 
-        if (model.containsAttribute("isAdmin")) {
-            return "adminPage";
+        if (!model.containsAttribute("isAdmin")) {
+            return "errorNotAuthorized";
         }
 
-        return "errorNotAuthorized";
+        return "adminPage";
     }
 
     @GetMapping("/logout")
@@ -76,6 +76,4 @@ public class AccountController {
 
         return "redirect:/login";
     }
-
-
 }

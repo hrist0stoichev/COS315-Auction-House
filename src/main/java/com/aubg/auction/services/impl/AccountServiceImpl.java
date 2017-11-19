@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -28,7 +29,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
     public void createUser(User user) {
-        user.setAdmin(false);
         userDAO.save(user);
     }
 
@@ -38,5 +38,9 @@ public class AccountServiceImpl implements AccountService {
 
     public User getUserById(long userId) {
         return this.userDAO.findOne(userId);
+    }
+
+    public List<User> getAllUsers() {
+        return this.userDAO.findAll();
     }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${user.username}">Username</title>
+<<<<<<< HEAD
+    <style>
+
+        #a {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-size: 120%;
+        }
+    </style>
+=======
+>>>>>>> 3df4324f8bfb0bd9dc97c294759391e3af4f4d84
+</head>
+<body>
+<h1 th:text="${user.username}">Username</h1>
+<div>
+    <div>
+        <h3>Log-in credentials</h3>
+        <div>Username: <span th:text="${user.username}">Username</span></div>
+        <div>Password: <span th:text="${user.password}">Password</span></div>
+        <div>Admin: <span th:text="${user.isAdmin} ? 'yes' : 'no'">Admin</span></div>
+    </div>
+    <div>
+        <h3>Personal details</h3>
+        <div>First name: <span th:text="${user.firstName}">First name</span></div>
+        <div>Last name: <span th:text="${user.lastName}">Last name</span></div>
+        <div>Email: <span th:text="${user.email}">Email</span></div>
+        <div>Telephone Number: <span th:text="${user.telephoneNumber}">Telephone number</span></div>
+    </div>
+    <div>
+        <h3>Address details</h3>
+        <div>Country: <span th:text="${user.address.country}">Country</span></div>
+        <div>City: <span th:text="${user.address.city}">City</span></div>
+        <div>Street: <span th:text="${user.address.street}">Street</span></div>
+    </div>
+    <div>
+        <h3>Credit card details</h3>
+        <div>Credit Card Type: <span th:text="${user.creditCardType}">Credit Card Type</span></div>
+        <div>Credit Card Number: <span th:text="${user.creditCardNumber}">Credit Card Number</span></div>
+    </div>
+</div>
+<<<<<<< HEAD
+<a id="a" th:href="@{/admin}">Return to admin page.</a>
+=======
+>>>>>>> 3df4324f8bfb0bd9dc97c294759391e3af4f4d84
+</body>
+</html>
