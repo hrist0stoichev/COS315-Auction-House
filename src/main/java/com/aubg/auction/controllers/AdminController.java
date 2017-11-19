@@ -10,14 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-<<<<<<< HEAD
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-=======
->>>>>>> 3df4324f8bfb0bd9dc97c294759391e3af4f4d84
 import java.util.List;
 
 @Controller
@@ -38,7 +34,6 @@ public class AdminController {
     @GetMapping("/addAuction")
     public String addAuction(Model model) {
         if (!model.containsAttribute("isAdmin")) {
-<<<<<<< HEAD
             return "errorNotAuthorized";
         }
 
@@ -118,72 +113,6 @@ public class AdminController {
         if (!model.containsAttribute("isAdmin")) {
             return "errorNotAuthorized";
         }
-
-=======
-            return "errorNotAuthorized";
-        }
-
-        return "formAddItem";
-    }
-
-    @PostMapping("/addAuction")
-    public String addAuction(Model model, @RequestParam(name = "category_name") String categoryName,
-                             @ModelAttribute Auction auction) {
-        if (categoryService.categoryExists(categoryName)) {
-            adminService.addNewItem(auction, categoryName);
-            return "successAdded";
-        }
-
-        return "categoryNotExisting";
-    }
-
-    @GetMapping("/deleteAuction")
-    public String deleteAuction(Model model) {
-        if (!model.containsAttribute("isAdmin")) {
-            return "errorNotAuthorized";
-        }
-
-        return "formDeleteItem";
-    }
-
-    @PostMapping("/deleteAuction")
-    public String deleteAuction(Model model, @RequestParam(name = "auction_id") int auctionId) {
-        if (!model.containsAttribute("isAdmin")) {
-            return "errorNotAuthorized";
-        }
-
-        adminService.deleteAuctionById(auctionId);
-        return "successDeleted";
-    }
-
-    @GetMapping("/addCategory")
-    public String addCategory(Model model) {
-        if (!model.containsAttribute("isAdmin")) {
-            return "errorNotAuthorized";
-        }
-
-        return "formAddCategory";
-    }
-
-    @PostMapping("/addCategory")
-    public String addAuction(Model model, @RequestParam(name = "category_name") String categoryName) {
-        if (!model.containsAttribute("isAdmin")) {
-            return "errorNotAuthorized";
-        }
-
-        Category category = new Category();
-        category.setName(categoryName);
-        adminService.addNewCategory(category);
-        return "successAdded";
-    }
-
-    @GetMapping("/allUsers")
-    public String allUsers(Model model) {
-        if (!model.containsAttribute("isAdmin")) {
-            return "errorNotAuthorized";
-        }
-
->>>>>>> 3df4324f8bfb0bd9dc97c294759391e3af4f4d84
         List<User> users = this.accountService.getAllUsers();
         model.addAttribute("users", users);
         return "allUsers";
