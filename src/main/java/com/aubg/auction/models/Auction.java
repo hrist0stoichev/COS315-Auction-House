@@ -18,19 +18,12 @@ public class Auction {
     private Long price;
 
     @Column(nullable = false)
-<<<<<<< HEAD
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date startDate;
 
-    @Column(nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
-=======
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private Date startDate;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
->>>>>>> 3df4324f8bfb0bd9dc97c294759391e3af4f4d84
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
     @Column(nullable = false)
