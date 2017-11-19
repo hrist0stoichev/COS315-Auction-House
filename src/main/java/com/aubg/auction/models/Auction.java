@@ -21,7 +21,6 @@ public class Auction {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date startDate;
 
-
     @Column(nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;

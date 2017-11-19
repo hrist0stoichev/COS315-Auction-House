@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -82,6 +81,7 @@ public class AdminController {
 
 
 
+
     @GetMapping("/deleteAuction")
     public String deleteAuction(Model model) {
         if (!model.containsAttribute("isAdmin")) {
@@ -107,6 +107,7 @@ public class AdminController {
         if (!model.containsAttribute("isAdmin")) {
             return "errorNotAuthorized";
         }
+
 
         Category category = new Category();
         category.setName(categoryName);
