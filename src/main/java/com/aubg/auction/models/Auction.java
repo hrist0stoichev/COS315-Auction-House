@@ -1,7 +1,6 @@
 package com.aubg.auction.models;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,30 +14,27 @@ public class Auction {
     @Column(nullable = false)
     private String name;
 
-
     @Column(nullable = false)
     private Long price;
 
-    @Column(nullable = true)
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date startDate;
 
-    @Column(nullable = true)
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
-    @Basic
-    @Lob
-    private byte[]image;
+    @Column(nullable = false)
+    private String image;
 
-    public Auction() {
-    }
+    public Auction() {}
 
-    public Auction(String name, Long price, Date startDate, Date endDate, byte[] image) {
+    public Auction(String name, Long price, Date startDate, Date endDate, String image) {
         this.name = name;
         this.price = price;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate=startDate;
+        this.endDate=endDate;
         this.image = image;
     }
 
@@ -82,13 +78,9 @@ public class Auction {
         this.endDate = endDate;
     }
 
+    public String getImage() { return image; }
 
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

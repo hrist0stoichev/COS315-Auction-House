@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8"/>
+	<style>
+		body {
+			background-color: beige;
+		}
+	</style>
+
+	<title>Delete Auction</title>
+</head>
+<body>
+	<form th:method="post">
+		<label>Auction ID to delete:</label>
+		<input th:type="text" name="auction_id"/>
+		<br/><br/>
+		<input th:type="submit" value="Delete"/>
+		<br/><br/>
+
+		<ul id="auctions"></ul>
+
+		<script th:src="@{/deleteauctionspage.js}"></script>
+
+	</form>
+</body>
+</html>

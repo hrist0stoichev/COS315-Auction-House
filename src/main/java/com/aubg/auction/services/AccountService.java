@@ -2,6 +2,8 @@ package com.aubg.auction.services;
 
 import com.aubg.auction.models.User;
 
+import java.util.List;
+
 public interface AccountService {
     User getUserByUsername(String username);
 
@@ -12,4 +14,6 @@ public interface AccountService {
     boolean isPasswordCorrect(User user, String password);
 
     User getUserById(long userId);
+
+    List<User> getAllUsers();
 }

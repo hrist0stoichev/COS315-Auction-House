@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 @Transactional
 public class AdminServiceImpl implements AdminService {
-     private final AuctionDao auctionDao;
-     private final CategoryDAO categoryDAO;
-
-
+    private final AuctionDao auctionDao;
+    private final CategoryDAO categoryDAO;
 
     @Autowired
     public AdminServiceImpl(AuctionDao auctionDao, CategoryDAO categoryDAO) {
@@ -25,12 +25,19 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addNewItem(Auction auction,String categoryName) {
-
+    public void addNewItem(Auction auction, String categoryName) {
         Category category = categoryDAO.getCategoryByName(categoryName);
         auctionDao.save(auction);
         category.getAuctions().add(auction);
+    }
 
+    @Override
+    public void addNewCategory(Category category) {
+        categoryDAO.save(category);
+    }
 
+    @Override
+    public void deleteAuctionById(long auctionId) {
+        auctionDao.delete(auctionId);
     }
 }

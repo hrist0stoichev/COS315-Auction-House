@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users</title>
+    <style>
+
+        #a {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-size: 120%;
+        }
+    </style>
+</head>
+<body>
+<h1>Users</h1>
+<ul>
+    <li th:each="user : ${users}">
+        <a th:href="@{/allUsers/{id}(id=${user.id})}" th:text="${user.username}">Username</a>
+    </li>
+</ul>
+<a id="a" th:href="@{/admin}">Return to admin page.</a>
+</body>
+</html>
