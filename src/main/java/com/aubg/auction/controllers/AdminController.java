@@ -43,7 +43,7 @@ public class AdminController {
 
     @PostMapping("/addAuction")
     public String addAuction(Model model, @RequestParam(name = "category_name") String categoryName,
-                             @RequestParam("name") String name,@RequestParam("price") Long price,
+                             @RequestParam("name") String name,@RequestParam("price") Double price,
                              @RequestParam("start_date")String start_date,
                              @RequestParam("end_date")String end_date,
                              @RequestParam("image") String image){
@@ -59,7 +59,7 @@ public class AdminController {
                 e.printStackTrace();
             }
 
-            Auction auction =new Auction(name,price,start,end,image);
+            Auction auction = new Auction(name,price,start,end,image);
 
 
             adminService.addNewItem(auction, categoryName);
@@ -78,9 +78,6 @@ public class AdminController {
 
         return "formAddCategory";
     }
-
-
-
 
     @GetMapping("/deleteAuction")
     public String deleteAuction(Model model) {

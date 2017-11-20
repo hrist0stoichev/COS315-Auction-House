@@ -15,7 +15,7 @@ public class Auction {
     private String name;
 
     @Column(nullable = false)
-    private Long price;
+    private Double price;
 
     @Column(nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd")
@@ -30,7 +30,7 @@ public class Auction {
 
     public Auction() {}
 
-    public Auction(String name, Long price, Date startDate, Date endDate, String image) {
+    public Auction(String name, Double price, Date startDate, Date endDate, String image) {
         this.name = name;
         this.price = price;
         this.startDate=startDate;
@@ -54,11 +54,11 @@ public class Auction {
         this.name = name;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
