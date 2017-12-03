@@ -28,14 +28,23 @@ public class Auction {
     @Column(nullable = false)
     private String image;
 
+    @Basic
+    private boolean isSold;
+
+    @Basic
+    private boolean onSale;
+
     public Auction() {}
 
     public Auction(String name, Double price, Date startDate, Date endDate, String image) {
         this.name = name;
         this.price = price;
-        this.startDate=startDate;
-        this.endDate=endDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.image = image;
+        this.onSale=false;
+        this.isSold=false;
+
     }
 
     public Long getId() {
@@ -82,6 +91,23 @@ public class Auction {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean getIsSold() {
+        return isSold;
+    }
+
+    public void setIsSold(boolean sold) {
+        this.isSold = sold;
+    }
+
+
+    public boolean getOnSale() {
+        return onSale;
+    }
+
+    public void setOnSale(boolean onSale) {
+        this.onSale = onSale;
     }
 }
 

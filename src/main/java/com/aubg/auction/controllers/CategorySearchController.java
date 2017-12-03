@@ -52,6 +52,7 @@ public class CategorySearchController {
         return categorySearchService.getAllAuctions();
     }
 
+
     @GetMapping("/categories/")
     public @ResponseBody
     List<Category> getAllCategories() {

@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @SessionAttributes({"currentUserId", "isAdmin"})
@@ -56,7 +57,11 @@ public class AdminController {
                 start = sdf.parse(start_date);
                 end =sdf.parse(end_date);
             } catch (ParseException e) {
-                e.printStackTrace();
+                System.out.println("unparsable date");;
+            }
+
+            if(start==null || end==null){
+                return "redirect:/addAuction";
             }
 
             Auction auction = new Auction(name,price,start,end,image);
@@ -77,6 +82,13 @@ public class AdminController {
         }
 
         return "formAddCategory";
+    }
+
+    @GetMapping("/soldAuctions/")
+    public @ResponseBody List<Auction> getAllSoldAuctions(){
+
+        return this.adminService.getSoldAuctions();
+
     }
 
     @GetMapping("/deleteAuction")
@@ -134,4 +146,47 @@ public class AdminController {
 
         return "userDetails";
     }
+
+    @GetMapping("/startAuction")
+    public String startAuction(Model model){
+
+        if (!model.containsAttribute("isAdmin")) {
+            return "errorNotAuthorized";
+        }
+
+        else{
+            Map<Date, List<Auction>> auctionsByDate = adminService.auctionsGroupedByStartDate();
+            model.addAttribute("auctionsByDate",auctionsByDate);
+
+            return "startAuction";
+
+        }
+
+
+    }
+
+    @GetMapping("/startAuction/{startDate}")
+    public String startAuction(Model model, @PathVariable String startDate){
+        if (!model.containsAttribute("isAdmin")) {
+            return "errorNotAuthorized";
+        }
+
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date=null;
+        try {
+            date = sdf.parse(startDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        List<Auction> auctionsByStartDate = adminService.getAuctionsByStartDate(date);
+        auctionsByStartDate.forEach((auction) -> auction.setOnSale(true));
+        adminService.saveChanges(auctionsByStartDate);
+        model.addAttribute("startDate",date);
+
+
+        return "successStartAuction";
+    }
 }
+
+

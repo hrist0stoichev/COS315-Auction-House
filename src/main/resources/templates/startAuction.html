@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+     <style>
+
+        body {
+            background-color: beige;
+        }
+
+        a{
+            font-size: 130%;
+            color:maroon ;
+        }
+
+        table{
+            border-spacing: 15px;
+        }
+
+        thead{
+            color: darkgoldenrod;
+            font-size: 120%;
+            padding-left: 30px;
+        }
+        td{
+            color:blue;
+            font-size: 110%;
+        }
+    </style>
+
+    <title>Start an Auction</title>
+</head>
+<body>
+
+<h2>All Items Organized by Start Date</h2>
+
+
+
+<table>
+    <tr th:each="item : ${auctionsByDate}">
+        <td>
+            <a th:href="@{/startAuction/{date}(date=${item.key})}"
+               th:text="${{#dates.format({item.key}, 'dd-MM-yyyy')}}">
+
+            </a>
+        </td>
+
+
+        <table>
+
+            <thead>
+            <th>Name</th>
+            <th>Price</th>
+            <th>End Date</th>
+            <th>Sold</th>
+            </thead>
+
+            <tr th:each="auction : ${item.value}">
+                <td th:text="${auction.name}">
+
+                </td>
+
+                <td th:text="${auction.price}">
+
+                </td>
+
+                <td th:text="${{#dates.format({auction.endDate}, 'dd-MM-yyyy')}}">
+
+                </td>
+
+                <td th:if="${auction.isSold==true}" th:text="Yes">
+
+                </td>
+
+                <td th:if="${auction.isSold==false}" th:text="No">
+
+                </td>
+
+
+
+            </tr>
+
+
+
+        </table>
+
+
+    </tr>
+</table>
+
+
+</body>
+</html>

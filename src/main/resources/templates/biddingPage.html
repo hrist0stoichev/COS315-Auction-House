@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Bidding Page</title>
+
+    <style>
+
+        body {
+            background-color: beige;
+        }
+
+        a{
+            font-size: 130%;
+        }
+
+        table{
+            border-spacing: 20px;
+        }
+
+        th{
+            color: darkgoldenrod;
+            font-size: 120%;
+        }
+        td{
+            color:blue;
+            font-size: 110%;
+        }
+
+
+        #a {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-size: 120%;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<table>
+
+    <thead>
+    <th>Name</th>
+
+    <th>Price</th>
+    <th>End Date</th>
+    <th>Sold</th>
+    </thead>
+
+    <tr th:each="auction : ${itemsOnSale}">
+        <td th:text="${auction.name}">
+
+        </td>
+
+        <td th:text="${auction.price}">
+
+        </td>
+
+        <td th:text="${{#dates.format({auction.endDate}, 'dd-MM-yyyy')}}">
+
+        </td>
+
+        <td th:if="${auction.isSold==true}" th:text="Yes">
+
+        </td>
+
+        <td th:if="${auction.isSold==false}" th:text="No">
+
+        </td>
+
+
+
+    </tr>
+
+
+
+</table>
+
+<div id="a">
+    <a th:href="@{/logout}">Log out</a>
+</div>
+
+
+
+</body>
+</html>

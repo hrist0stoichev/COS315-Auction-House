@@ -1,5 +1,5 @@
 window.onload = function() {
-    httpGetAsync("/category/", function callback(response) {
+    httpGetAsync("/soldAuctions/", function callback(response) {
         var auctions = JSON.parse(response);
         var list = document.getElementById('auctions');
         list.innerHTML = '';

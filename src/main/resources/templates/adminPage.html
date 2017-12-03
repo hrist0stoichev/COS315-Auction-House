@@ -25,28 +25,31 @@
 <body>
 	<h1 th:text="${'Hello, ' + username}">Hello, admin</h1>
 	<p>Choose what you want to do.</p>
-	<br/> <br/>
+	<br/> <br/> <br/>
 
 	<a th:href="@{/addAuction}">Add Auction</a>
 
-	<br/><br/>
+	<br/><br/><br/>
 
 	<a th:href="@{/addCategory}">Add Category</a>
 
-	<br/><br/>
+	<br/><br/><br/>
 
 	<a th:href="@{/catalog}">Check Auctions</a>
 
-	<br/><br/>
+	<br/><br/><br/>
 
 	<a th:href="@{/categories}">Check Categories</a>
 
-	<br/><br/>
+	<br/><br/><br/>
 
 	<a th:href="@{/deleteAuction}">Delete Auction</a>
 
 	<br /><br /><br />
 	<a th:href="@{/allUsers}">All Users</a>
+
+	<br /><br /><br />
+	<a th:href="@{/startAuction}">Start an Auction</a>
 
 	<div id="a">
 		<a th:href="@{/logout}">Log out</a>
