@@ -25,6 +25,14 @@
 			position: relative;
 			text-align: center;
 		}
+
+
+        #a {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-size: 120%;
+        }
 	</style>
 </head>
 <body>
@@ -37,5 +45,10 @@
 	</div>
 
 	<script th:src="@{/auctionspage.js}"></script>
+
+
+	<div id="a">
+        <a th:href="@{/bid}">Bid</a>
+	</div>
 </body>
 </html>

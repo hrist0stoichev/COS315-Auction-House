@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Success</title>
+    <style>
+        body{
+            background-color: darkgoldenrod;
+        }
+
+        p{
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 140%;
+        }
+
+        a{
+            font-size: 120%;
+        }
+    </style>
+</head>
+<body>
+
+<p th:text=" 'Auction started successfully for items with ' +
+  ${{#dates.format({startDate}, 'dd-MM-yyyy')}}"></p>
+
+<a th:href="@{/bid}"> Bidding Page</a>
+<a th:href="@{/admin}">Return to admin page.</a>
+</body>
+</html>

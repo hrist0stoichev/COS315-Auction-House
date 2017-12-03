@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -40,4 +43,28 @@ public class AdminServiceImpl implements AdminService {
     public void deleteAuctionById(long auctionId) {
         auctionDao.delete(auctionId);
     }
+
+    @Override
+    public Map<Date, List<Auction>> auctionsGroupedByStartDate() {
+
+       return this.auctionDao.findAll().stream()
+                .collect(Collectors.groupingBy(a->a.getStartDate()));
+    }
+
+    @Override
+    public List<Auction> getAuctionsByStartDate(Date date) {
+        return this.auctionDao.getAllByStartDate(date);
+    }
+
+    @Override
+    public List<Auction> getSoldAuctions() {
+        return this.auctionDao.getAllByIsSold(true);
+    }
+
+    @Override
+    public void saveChanges(List<Auction> auctions) {
+        this.auctionDao.save(auctions);
+    }
+
+
 }
