@@ -44,7 +44,10 @@
 		<th>Price</th>
 		<th>End Date</th>
 		<th>Sold</th>
+
+		<!--show the highest bidder if admin-->
 		<th th:if="${(isAdmin==1)}">Highest bidding user</th>
+
 		</thead>
 
 		<tr th:each="auction, iterStat : ${itemsOnSale}">
@@ -53,8 +56,12 @@
 			<td th:text="${{#dates.format({auction.endDate}, 'dd-MM-yyyy')}}"></td>
 			<td th:if="${auction.isSold==true}" th:text="Yes"></td>
 			<td th:if="${auction.isSold==false}" th:text="No"></td>
+
+			<!--if admin and highestBidUser exists, show the user name, else show that there are no bids so far-->
 			<td th:if="${(isAdmin==1)} and ${auction.highestBidUser != null}" th:text="${auction.highestBidUser.username}"></td>
 			<td th:if="${(isAdmin==1)} and ${auction.highestBidUser == null}" th:text="'No bids so far'"></td>
+
+			<!--if a regular user, show a field for bid input and a button for submitting the bid-->
 			<td th:if="${!(isAdmin==1)}">
 				<input th:type="text" name="bidamount" th:id="'bidamount'+${iterStat.index}"/>
 			</td>
