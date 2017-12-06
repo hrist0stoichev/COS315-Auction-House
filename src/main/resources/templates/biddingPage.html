@@ -1,90 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en"
-      xmlns="http://www.w3.org/1999/xhtml">
+	  xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Bidding Page</title>
+	<meta charset="UTF-8"/>
+	<title>Bidding Page</title>
 
-    <style>
+	<style>
+		body {
+			background-color: beige;
+		}
 
-        body {
-            background-color: beige;
-        }
+		a {
+			font-size: 130%;
+		}
 
-        a{
-            font-size: 130%;
-        }
+		table {
+			border-spacing: 20px;
+		}
 
-        table{
-            border-spacing: 20px;
-        }
+		th {
+			color: darkgoldenrod;
+			font-size: 120%;
+		}
 
-        th{
-            color: darkgoldenrod;
-            font-size: 120%;
-        }
-        td{
-            color:blue;
-            font-size: 110%;
-        }
+		td {
+			color: blue;
+			font-size: 110%;
+		}
 
-
-        #a {
-            position: absolute;
-            top: 0px;
-            right: 10px;
-            font-size: 120%;
-        }
-
-    </style>
+		#a {
+			position: absolute;
+			top: 0px;
+			right: 10px;
+			font-size: 120%;
+		}
+	</style>
 
 </head>
 <body>
+	<table>
+		<thead>
+		<th>Name</th>
+		<th>Price</th>
+		<th>End Date</th>
+		<th>Sold</th>
+		<th th:if="${(isAdmin==1)}">Highest bidding user</th>
+		</thead>
 
-<table>
+		<tr th:each="auction, iterStat : ${itemsOnSale}">
+			<td th:text="${auction.name}"></td>
+			<td th:text="${auction.price}" th:id="'currentbid'+${iterStat.index}"></td>
+			<td th:text="${{#dates.format({auction.endDate}, 'dd-MM-yyyy')}}"></td>
+			<td th:if="${auction.isSold==true}" th:text="Yes"></td>
+			<td th:if="${auction.isSold==false}" th:text="No"></td>
+			<td th:if="${(isAdmin==1)} and ${auction.highestBidUser != null}" th:text="${auction.highestBidUser.username}"></td>
+			<td th:if="${(isAdmin==1)} and ${auction.highestBidUser == null}" th:text="'No bids so far'"></td>
+			<td th:if="${!(isAdmin==1)}">
+				<input th:type="text" name="bidamount" th:id="'bidamount'+${iterStat.index}"/>
+			</td>
+			<td th:if="${!(isAdmin==1)}">
+				<button th:onclick="'makeBid('+${iterStat.index}+','+${auction.id}+')'">Make Bid</button>
+			</td>
+		</tr>
+	</table>
 
-    <thead>
-    <th>Name</th>
+	<div id="a">
+		<a th:href="@{/logout}">Log out</a>
+	</div>
 
-    <th>Price</th>
-    <th>End Date</th>
-    <th>Sold</th>
-    </thead>
-
-    <tr th:each="auction : ${itemsOnSale}">
-        <td th:text="${auction.name}">
-
-        </td>
-
-        <td th:text="${auction.price}">
-
-        </td>
-
-        <td th:text="${{#dates.format({auction.endDate}, 'dd-MM-yyyy')}}">
-
-        </td>
-
-        <td th:if="${auction.isSold==true}" th:text="Yes">
-
-        </td>
-
-        <td th:if="${auction.isSold==false}" th:text="No">
-
-        </td>
-
-
-
-    </tr>
-
-
-
-</table>
-
-<div id="a">
-    <a th:href="@{/logout}">Log out</a>
-</div>
-
-
-
+	<script th:src="@{/biddingPage.js}"></script>
 </body>
 </html>

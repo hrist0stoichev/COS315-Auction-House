@@ -55,6 +55,7 @@ public class AccountController {
             model.addAttribute("isAdmin", 1);
             return "redirect:/admin";
         }
+        else model.addAttribute("isAdmin", 0);
 
         return "redirect:/catalog";
     }
@@ -62,7 +63,7 @@ public class AccountController {
     @GetMapping("/admin")
     public String adminOptions(Model model) {
 
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int)model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 

@@ -1,6 +1,7 @@
 package com.aubg.auction.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,15 +19,18 @@ public class Auction {
     private Double price;
 
     @Column(nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
     @Column(nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     @Column(nullable = false)
     private String image;
+
+    @ManyToOne
+    private User highestBidUser;
 
     @Basic
     private boolean isSold;
@@ -42,9 +46,19 @@ public class Auction {
         this.startDate = startDate;
         this.endDate = endDate;
         this.image = image;
-        this.onSale=false;
-        this.isSold=false;
+        this.onSale = false;
+        this.isSold = false;
+    }
 
+    public Auction(String name, Double price, Date startDate, Date endDate, String image, User highestBidUser) {
+        this.name = name;
+        this.price = price;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.image = image;
+        this.onSale = false;
+        this.isSold = false;
+        this.highestBidUser = highestBidUser;
     }
 
     public Long getId() {
@@ -87,7 +101,9 @@ public class Auction {
         this.endDate = endDate;
     }
 
-    public String getImage() { return image; }
+    public String getImage() {
+        return image;
+    }
 
     public void setImage(String image) {
         this.image = image;
@@ -101,13 +117,20 @@ public class Auction {
         this.isSold = sold;
     }
 
-
     public boolean getOnSale() {
         return onSale;
     }
 
     public void setOnSale(boolean onSale) {
         this.onSale = onSale;
+    }
+
+    public User getHighestBidUser() {
+        return highestBidUser;
+    }
+
+    public void setHighestBidUser(User highestBidUser) {
+        this.highestBidUser = highestBidUser;
     }
 }
 

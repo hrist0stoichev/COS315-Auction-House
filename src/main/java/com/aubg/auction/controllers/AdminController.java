@@ -35,7 +35,7 @@ public class AdminController {
 
     @GetMapping("/addAuction")
     public String addAuction(Model model) {
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
@@ -44,28 +44,28 @@ public class AdminController {
 
     @PostMapping("/addAuction")
     public String addAuction(Model model, @RequestParam(name = "category_name") String categoryName,
-                             @RequestParam("name") String name,@RequestParam("price") Double price,
-                             @RequestParam("start_date")String start_date,
-                             @RequestParam("end_date")String end_date,
-                             @RequestParam("image") String image){
+                             @RequestParam("name") String name, @RequestParam("price") Double price,
+                             @RequestParam("start_date") String start_date,
+                             @RequestParam("end_date") String end_date,
+                             @RequestParam("image") String image) {
 
         if (categoryService.categoryExists(categoryName)) {
             DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date start = null;
-            Date end=null;
+            Date end = null;
             try {
                 start = sdf.parse(start_date);
-                end =sdf.parse(end_date);
+                end = sdf.parse(end_date);
             } catch (ParseException e) {
-                System.out.println("unparsable date");;
+                System.out.println("unparsable date");
+                ;
             }
 
-            if(start==null || end==null){
+            if (start == null || end == null) {
                 return "redirect:/addAuction";
             }
 
-            Auction auction = new Auction(name,price,start,end,image);
-
+            Auction auction = new Auction(name, price, start, end, image);
 
             adminService.addNewItem(auction, categoryName);
             return "successAdded";
@@ -77,7 +77,7 @@ public class AdminController {
 
     @GetMapping("/addCategory")
     public String addCategory(Model model) {
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
@@ -85,7 +85,8 @@ public class AdminController {
     }
 
     @GetMapping("/soldAuctions/")
-    public @ResponseBody List<Auction> getAllSoldAuctions(){
+    public @ResponseBody
+    List<Auction> getAllSoldAuctions() {
 
         return this.adminService.getSoldAuctions();
 
@@ -93,7 +94,7 @@ public class AdminController {
 
     @GetMapping("/deleteAuction")
     public String deleteAuction(Model model) {
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
@@ -102,7 +103,7 @@ public class AdminController {
 
     @PostMapping("/deleteAuction")
     public String deleteAuction(Model model, @RequestParam(name = "auction_id") int auctionId) {
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
@@ -113,7 +114,7 @@ public class AdminController {
 
     @PostMapping("/addCategory")
     public String addAuction(Model model, @RequestParam(name = "category_name") String categoryName) {
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
@@ -126,7 +127,7 @@ public class AdminController {
 
     @GetMapping("/allUsers")
     public String allUsers(Model model) {
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
@@ -137,7 +138,7 @@ public class AdminController {
 
     @GetMapping("/allUsers/{userId}")
     public String userDetails(Model model, @PathVariable String userId) {
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
@@ -148,15 +149,13 @@ public class AdminController {
     }
 
     @GetMapping("/startAuction")
-    public String startAuction(Model model){
+    public String startAuction(Model model) {
 
-        if (!model.containsAttribute("isAdmin")) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
-        }
-
-        else{
+        } else {
             Map<Date, List<Auction>> auctionsByDate = adminService.auctionsGroupedByStartDate();
-            model.addAttribute("auctionsByDate",auctionsByDate);
+            model.addAttribute("auctionsByDate", auctionsByDate);
 
             return "startAuction";
 
@@ -166,13 +165,13 @@ public class AdminController {
     }
 
     @GetMapping("/startAuction/{startDate}")
-    public String startAuction(Model model, @PathVariable String startDate){
-        if (!model.containsAttribute("isAdmin")) {
+    public String startAuction(Model model, @PathVariable String startDate) {
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
             return "errorNotAuthorized";
         }
 
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date=null;
+        Date date = null;
         try {
             date = sdf.parse(startDate);
         } catch (ParseException e) {
@@ -182,7 +181,7 @@ public class AdminController {
         List<Auction> auctionsByStartDate = adminService.getAuctionsByStartDate(date);
         auctionsByStartDate.forEach((auction) -> auction.setOnSale(true));
         adminService.saveChanges(auctionsByStartDate);
-        model.addAttribute("startDate",date);
+        model.addAttribute("startDate", date);
 
 
         return "successStartAuction";
