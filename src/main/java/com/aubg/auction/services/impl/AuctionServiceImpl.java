@@ -1,7 +1,9 @@
 package com.aubg.auction.services.impl;
 
 import com.aubg.auction.dao.AuctionDao;
+import com.aubg.auction.dao.CategoryDAO;
 import com.aubg.auction.models.Auction;
+import com.aubg.auction.models.Category;
 import com.aubg.auction.models.User;
 import com.aubg.auction.services.AuctionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,12 @@ import java.util.List;
 public class AuctionServiceImpl implements AuctionService {
 
     private final AuctionDao auctionDao;
+    private final CategoryDAO categoryDAO;
 
     @Autowired
-    public AuctionServiceImpl(AuctionDao auctionDao) {
+    public AuctionServiceImpl(AuctionDao auctionDao, CategoryDAO categoryDAO) {
         this.auctionDao = auctionDao;
+        this.categoryDAO = categoryDAO;
     }
 
     @Override
@@ -43,6 +47,21 @@ public class AuctionServiceImpl implements AuctionService {
         a.setHighestBidUser(user);
         this.auctionDao.save(a);
     }
+
+    @Override
+    public void addNewItem(Auction auction, String categoryName) {
+        Category category = categoryDAO.getCategoryByName(categoryName);
+        this.auctionDao.save(auction);
+        category.getAuctions().add(auction);
+        this.categoryDAO.save(category);
+    }
+
+    @Override
+    public Auction findAuctionById(Long id) {
+        return this.auctionDao.findOne(id);
+    }
+
+
 }
 
 

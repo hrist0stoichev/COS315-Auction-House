@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface AdminService {
-    void addNewItem(Auction auction,String categoryName);
 
     void addNewCategory(Category category);
 
@@ -19,6 +18,7 @@ public interface AdminService {
     List<Auction> getAuctionsByStartDate(Date date);
 
     List<Auction> getSoldAuctions();
+    List<Auction> getSuggestedByUsersAuctions();
 
 
     void saveChanges(List<Auction> auctions);

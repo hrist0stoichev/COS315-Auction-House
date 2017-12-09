@@ -11,4 +11,6 @@ public interface AuctionService {
     List<Date> getStartDatesForItemsOnSale();
     void updateAuctionPrice(Long auctionId, Double price);
     void updateAuctionUser(Long auctionId, User user);
+    void addNewItem(Auction auction,String categoryName);
+    Auction findAuctionById(Long id);
 }

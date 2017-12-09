@@ -27,12 +27,6 @@ public class AdminServiceImpl implements AdminService {
         this.categoryDAO = categoryDAO;
     }
 
-    @Override
-    public void addNewItem(Auction auction, String categoryName) {
-        Category category = categoryDAO.getCategoryByName(categoryName);
-        auctionDao.save(auction);
-        category.getAuctions().add(auction);
-    }
 
     @Override
     public void addNewCategory(Category category) {
@@ -47,13 +41,13 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Map<Date, List<Auction>> auctionsGroupedByStartDate() {
 
-       return this.auctionDao.findAll().stream()
+       return this.auctionDao.findAll().stream().filter(a->a.getIsApproved()==true)
                 .collect(Collectors.groupingBy(a->a.getStartDate()));
     }
 
     @Override
     public List<Auction> getAuctionsByStartDate(Date date) {
-        return this.auctionDao.getAllByStartDate(date);
+        return this.auctionDao.getAllByStartDateAndIsApproved(date,true);
     }
 
     @Override
@@ -62,9 +56,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<Auction> getSuggestedByUsersAuctions() {
+        return this.auctionDao.getAllByIsApproved(false);
+    }
+
+    @Override
     public void saveChanges(List<Auction> auctions) {
         this.auctionDao.save(auctions);
     }
+
 
 
 }

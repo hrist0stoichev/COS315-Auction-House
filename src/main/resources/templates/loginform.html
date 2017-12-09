@@ -10,6 +10,13 @@
             color: brown;
         }
 
+        a {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-size: 120%;
+        }
+
     </style>
 </head>
 <body>
@@ -23,6 +30,8 @@
     <input th:type="password" name="password"/> <br/> <br/>
 
     <input th:type="submit"/>
+
+    <a th:href="@{/register}">Register</a>
 </form>
 </body>
 </html>

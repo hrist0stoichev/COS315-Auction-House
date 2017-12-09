@@ -12,6 +12,8 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -37,7 +39,17 @@ public class CategorySearchServiceImpl implements CategorySearchService {
         if(category == null){
             return new HashSet<>();
         }
-        else return category.getAuctions();
+
+        else{
+
+            Set<Auction> auctions = category.getAuctions().stream()
+                    .filter(a -> a.getIsApproved() == true).collect(Collectors.toSet());
+
+            return auctions;
+
+        }
+
+
     }
 
     @Override

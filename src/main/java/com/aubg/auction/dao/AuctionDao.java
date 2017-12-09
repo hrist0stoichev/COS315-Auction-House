@@ -10,9 +10,10 @@ import java.util.List;
 
 public interface AuctionDao extends JpaRepository<Auction,Long> {
 
-    List<Auction> getAllByStartDate(Date startDate);
+    List<Auction> getAllByStartDateAndIsApproved(Date startDate, boolean approved);
     List<Auction> getAllByOnSale(boolean onSale);
     List<Auction> getAllByIsSold(boolean isSold);
+    List<Auction> getAllByIsApproved(boolean approved);
 
     @Query("select distinct a.startDate from Auction a where a.onSale=true")
     List<Date> getStartDateWhereOnSale();

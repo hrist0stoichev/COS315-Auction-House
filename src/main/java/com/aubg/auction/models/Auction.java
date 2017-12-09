@@ -38,27 +38,19 @@ public class Auction {
     @Basic
     private boolean onSale;
 
+    @Basic
+    private boolean isApproved;
+
     public Auction() {}
 
-    public Auction(String name, Double price, Date startDate, Date endDate, String image) {
-        this.name = name;
-        this.price = price;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.image = image;
-        this.onSale = false;
-        this.isSold = false;
-    }
+    public Auction(String name, Double price, Date startDate, Date endDate,
+                   String image) {
 
-    public Auction(String name, Double price, Date startDate, Date endDate, String image, User highestBidUser) {
         this.name = name;
         this.price = price;
         this.startDate = startDate;
         this.endDate = endDate;
         this.image = image;
-        this.onSale = false;
-        this.isSold = false;
-        this.highestBidUser = highestBidUser;
     }
 
     public Long getId() {
@@ -131,6 +123,14 @@ public class Auction {
 
     public void setHighestBidUser(User highestBidUser) {
         this.highestBidUser = highestBidUser;
+    }
+
+    public boolean getIsApproved() {
+        return this.isApproved;
+    }
+
+    public void setIsApproved(boolean approved) {
+        this.isApproved = approved;
     }
 }
 

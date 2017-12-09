@@ -17,6 +17,7 @@ function makeBid(index, auctionId) {
     bidAmount = parseFloat(bidAmount);
     currentBid = parseFloat(currentBid);
 
+
     if(bidAmount < currentBid) {
         alert("Bid amount is lower than the current bid. Please input a number higher than the current bid.");
         console.log("in if, is bid less than current?");

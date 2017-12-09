@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Success</title>
+    <style>
+        body{
+            background-color: bisque;
+        }
+
+        p{
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 140%;
+        }
+
+        a{
+            font-size: 120%;
+        }
+    </style>
+</head>
+<body>
+
+<p>The items have been successfully approved.</p>
+
+
+<a th:href="@{/admin}"> Return to admin page</a>
+
+</body>
+</html>

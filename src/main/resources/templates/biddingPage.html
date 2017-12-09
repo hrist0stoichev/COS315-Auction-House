@@ -34,6 +34,13 @@
 			right: 10px;
 			font-size: 120%;
 		}
+
+        #a1 {
+            position: absolute;
+            top: 25px;
+            right: 10px;
+            font-size: 120%;
+        }
 	</style>
 
 </head>
@@ -75,6 +82,17 @@
 		<a th:href="@{/logout}">Log out</a>
 	</div>
 
+    <br/> <br/>
+
+	<a th:href="@{/catalog}"></a>
+	<a th:href="@{/home}"></a>
+
 	<script th:src="@{/biddingPage.js}"></script>
+
+	<div id="a1">
+
+		<a th:href="@{/suggestAuction}">Suggest an item for sale</a>
+
+	</div>
 </body>
 </html>

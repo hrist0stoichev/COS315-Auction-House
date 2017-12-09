@@ -5,6 +5,7 @@ import com.aubg.auction.models.Category;
 import com.aubg.auction.models.User;
 import com.aubg.auction.services.AccountService;
 import com.aubg.auction.services.AdminService;
+import com.aubg.auction.services.AuctionService;
 import com.aubg.auction.services.CategorySearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +27,14 @@ public class AdminController {
     private final AdminService adminService;
     private final CategorySearchService categoryService;
     private final AccountService accountService;
+    private final AuctionService auctionService;
 
     @Autowired
-    public AdminController(AdminService adminService, CategorySearchService categoryService, AccountService accountService) {
+    public AdminController(AdminService adminService, CategorySearchService categoryService, AccountService accountService, AuctionService auctionService) {
         this.adminService = adminService;
         this.categoryService = categoryService;
         this.accountService = accountService;
+        this.auctionService = auctionService;
     }
 
     @GetMapping("/addAuction")
@@ -43,13 +47,13 @@ public class AdminController {
     }
 
     @PostMapping("/addAuction")
-    public String addAuction(Model model, @RequestParam(name = "category_name") String categoryName,
+    public String addAuction(Model model, @RequestParam(name = "category_name") String category_name,
                              @RequestParam("name") String name, @RequestParam("price") Double price,
                              @RequestParam("start_date") String start_date,
                              @RequestParam("end_date") String end_date,
                              @RequestParam("image") String image) {
 
-        if (categoryService.categoryExists(categoryName)) {
+        if (categoryService.categoryExists(category_name)) {
             DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date start = null;
             Date end = null;
@@ -58,7 +62,7 @@ public class AdminController {
                 end = sdf.parse(end_date);
             } catch (ParseException e) {
                 System.out.println("unparsable date");
-                ;
+
             }
 
             if (start == null || end == null) {
@@ -66,13 +70,16 @@ public class AdminController {
             }
 
             Auction auction = new Auction(name, price, start, end, image);
-
-            adminService.addNewItem(auction, categoryName);
+            auction.setIsApproved(true);
+            auctionService.addNewItem(auction, category_name);
             return "successAdded";
         }
+        
+            return "categoryNotExisting";
 
-        return "categoryNotExisting";
     }
+
+
 
 
     @GetMapping("/addCategory")
@@ -185,6 +192,44 @@ public class AdminController {
 
 
         return "successStartAuction";
+    }
+
+    @GetMapping("/approveAuctions")
+    public String approveSuggestedAuctions(Model model){
+
+        if (!model.containsAttribute("isAdmin") || (int) model.asMap().get("isAdmin") != 1) {
+            return "errorNotAuthorized";
+        }
+
+        List<Auction> suggestedByUsersAuctions = adminService.getSuggestedByUsersAuctions();
+        model.addAttribute("suggestedByUsersAuctions",suggestedByUsersAuctions);
+
+
+        return "suggestedAuctions";
+    }
+
+    @PostMapping("/approveAuctions")
+    public String approveSuggestedAuctions(@RequestParam(name = "ids",required = false)
+                                           Long[] ids){
+        if(ids!=null){
+
+            List<Auction> approvedAuctions=new ArrayList<>();
+
+            for(Long id: ids){
+
+                Auction auctionById = auctionService.findAuctionById(id);
+                auctionById.setIsApproved(true);
+                approvedAuctions.add(auctionById);
+
+
+            }
+
+            adminService.saveChanges(approvedAuctions);
+        }
+
+
+        return "successApproved";
+
     }
 }
 
