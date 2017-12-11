@@ -41,6 +41,9 @@ public class Auction {
     @Basic
     private boolean isApproved;
 
+    @Basic
+    private boolean isPaid;
+
     public Auction() {}
 
     public Auction(String name, Double price, Date startDate, Date endDate,
@@ -131,6 +134,14 @@ public class Auction {
 
     public void setIsApproved(boolean approved) {
         this.isApproved = approved;
+    }
+
+    public boolean getIsPaid() {
+        return this.isPaid;
+    }
+
+    public void setIsPaid(boolean paid) {
+       this. isPaid = paid;
     }
 }
 

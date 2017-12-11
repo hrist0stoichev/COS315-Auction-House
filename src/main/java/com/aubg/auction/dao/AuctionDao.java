@@ -1,6 +1,7 @@
 package com.aubg.auction.dao;
 
 import com.aubg.auction.models.Auction;
+import com.aubg.auction.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +15,7 @@ public interface AuctionDao extends JpaRepository<Auction,Long> {
     List<Auction> getAllByOnSale(boolean onSale);
     List<Auction> getAllByIsSold(boolean isSold);
     List<Auction> getAllByIsApproved(boolean approved);
+    List<Auction> getAllByIsSoldAndHighestBidUserAndIsPaid(boolean isSold, User highestBidUser, boolean isPaid);
 
     @Query("select distinct a.startDate from Auction a where a.onSale=true")
     List<Date> getStartDateWhereOnSale();

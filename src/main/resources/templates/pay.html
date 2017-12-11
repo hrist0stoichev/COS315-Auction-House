@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pay</title>
+
+    <style>
+        body{
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+
+<form th:method="post">
+
+    <table>
+
+
+
+        <thead>
+        <th>Name</th>
+        <th>Price</th>
+        </thead>
+
+        <tr th:each="auction : ${auctions}">
+
+            <td th:text="${auction.name}"></td>
+            <td th:text="${auction.price}"></td>
+
+
+        </tr>
+
+    </table>
+
+    <input th:type="submit" th:value="Pay"/>
+</form>
+
+</body>
+</html>

@@ -12,5 +12,7 @@ public interface AuctionService {
     void updateAuctionPrice(Long auctionId, Double price);
     void updateAuctionUser(Long auctionId, User user);
     void addNewItem(Auction auction,String categoryName);
+    void savePaid(List<Auction> auctions);
     Auction findAuctionById(Long id);
+    List<Auction> geSoldAuctionsToUser(User highestBidUser);
 }

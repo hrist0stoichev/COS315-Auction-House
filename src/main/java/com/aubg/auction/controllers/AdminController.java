@@ -208,6 +208,8 @@ public class AdminController {
         return "suggestedAuctions";
     }
 
+
+
     @PostMapping("/approveAuctions")
     public String approveSuggestedAuctions(@RequestParam(name = "ids",required = false)
                                            Long[] ids){
@@ -231,6 +233,38 @@ public class AdminController {
         return "successApproved";
 
     }
+
+    @PostMapping("/bid")
+    public String bid
+            (@RequestParam(name = "ids", required = false)
+                     Long[] ids) {
+        {
+            if (ids != null) {
+
+                List<Auction> soldAuctions = new ArrayList<>();
+
+                for (Long id : ids) {
+
+                    Auction auctionById = auctionService.findAuctionById(id);
+                    auctionById.setIsSold(true);
+                    soldAuctions.add(auctionById);
+
+                }
+
+
+                adminService.saveChanges(soldAuctions);
+
+
+            }
+
+            return "adminPage";
+
+        }
+
+    }
+
+
+
 }
 
 

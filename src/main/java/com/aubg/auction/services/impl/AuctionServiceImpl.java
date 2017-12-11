@@ -57,8 +57,18 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
     @Override
+    public void savePaid(List<Auction> auctions) {
+        auctionDao.save(auctions);
+    }
+
+    @Override
     public Auction findAuctionById(Long id) {
         return this.auctionDao.findOne(id);
+    }
+
+    @Override
+    public List<Auction> geSoldAuctionsToUser(User highestBidUser) {
+        return auctionDao.getAllByIsSoldAndHighestBidUserAndIsPaid(true,highestBidUser,false);
     }
 
 

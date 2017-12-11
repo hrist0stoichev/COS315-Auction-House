@@ -95,7 +95,39 @@ public class BiddingController {
         return "redirect:/suggestAuction";
 
 
+    }
 
+
+    @GetMapping("/pay")
+    public String pay(Model model,@ModelAttribute("currentUserId") String id){
+
+        if(!model.containsAttribute("currentUserId")){
+
+            return "redirect:/login";
+
+        }
+
+        long userId = Long.parseLong(id);
+        User user = accountService.getUserById(userId);
+
+
+        List<Auction> auctions = auctionService.geSoldAuctionsToUser(user);
+
+        model.addAttribute("auctions",auctions);
+
+        auctions.forEach((auction -> auction.setIsPaid(true)));
+        auctionService.savePaid(auctions);
+
+
+        return "pay";
+
+
+    }
+
+    @PostMapping("/pay")
+    public String pay(){
+
+        return "successPaid";
 
 
     }

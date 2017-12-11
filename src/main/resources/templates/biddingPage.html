@@ -35,64 +35,110 @@
 			font-size: 120%;
 		}
 
-        #a1 {
-            position: absolute;
-            top: 25px;
+		#a1 {
+			position: absolute;
+			top: 25px;
+			right: 10px;
+			font-size: 120%;
+		}
+
+		#pay{
+			position: absolute;
+			top:45px;
             right: 10px;
-            font-size: 120%;
-        }
+			font-size: 120%;
+		}
 	</style>
 
 </head>
 <body>
+<table>
+	<thead>
+	<th>Name</th>
+	<th>Price</th>
+	<th>End Date</th>
+	<th>Sold</th>
+
+	<!--show the highest bidder if admin-->
+	<th th:if="${(isAdmin==1)}">Highest bidding user</th>
+
+	</thead>
+
+	<tr th:each="auction, iterStat : ${itemsOnSale}">
+		<td th:text="${auction.name}"></td>
+		<td th:text="${auction.price}" th:id="'currentbid'+${iterStat.index}"></td>
+		<td th:text="${{#dates.format({auction.endDate}, 'dd-MM-yyyy')}}"></td>
+		<td th:if="${auction.isSold==true}" th:text="Yes"></td>
+		<td th:if="${auction.isSold==false}" th:text="No"></td>
+
+
+		<!--if admin and highestBidUser exists, show the user name, else show that there are no bids so far-->
+		<td th:if="${(isAdmin==1)} and ${auction.highestBidUser != null}" th:text="${auction.highestBidUser.username}"></td>
+		<td th:if="${(isAdmin==1)} and ${auction.highestBidUser == null}" th:text="'No bids so far'"></td>
+
+		<!--if a regular user, show a field for bid input and a button for submitting the bid-->
+		<td th:if="${!(isAdmin==1) and (auction.isSold==false)}">
+			<input th:type="text" name="bidamount" th:id="'bidamount'+${iterStat.index}"/>
+		</td>
+		<td th:if="${!(isAdmin==1) and (auction.isSold==false)}">
+			<button th:onclick="'makeBid('+${iterStat.index}+','+${auction.id}+')'">Make Bid</button>
+		</td>
+	</tr>
+</table>
+
+<p th:if="${(isAdmin==1)}">
+<form th:method="post">
 	<table>
 		<thead>
 		<th>Name</th>
-		<th>Price</th>
-		<th>End Date</th>
-		<th>Sold</th>
-
-		<!--show the highest bidder if admin-->
-		<th th:if="${(isAdmin==1)}">Highest bidding user</th>
 
 		</thead>
 
-		<tr th:each="auction, iterStat : ${itemsOnSale}">
-			<td th:text="${auction.name}"></td>
-			<td th:text="${auction.price}" th:id="'currentbid'+${iterStat.index}"></td>
-			<td th:text="${{#dates.format({auction.endDate}, 'dd-MM-yyyy')}}"></td>
-			<td th:if="${auction.isSold==true}" th:text="Yes"></td>
-			<td th:if="${auction.isSold==false}" th:text="No"></td>
+		<tr th:each="auction: ${itemsOnSale}">
 
-			<!--if admin and highestBidUser exists, show the user name, else show that there are no bids so far-->
-			<td th:if="${(isAdmin==1)} and ${auction.highestBidUser != null}" th:text="${auction.highestBidUser.username}"></td>
-			<td th:if="${(isAdmin==1)} and ${auction.highestBidUser == null}" th:text="'No bids so far'"></td>
+			<td th:if="${auction.isSold==false}">
 
-			<!--if a regular user, show a field for bid input and a button for submitting the bid-->
-			<td th:if="${!(isAdmin==1)}">
-				<input th:type="text" name="bidamount" th:id="'bidamount'+${iterStat.index}"/>
+
+				<input type="checkbox" name="ids" th:value="${auction.id}"/>
+			<td th:text="${auction.name}">
+
 			</td>
-			<td th:if="${!(isAdmin==1)}">
-				<button th:onclick="'makeBid('+${iterStat.index}+','+${auction.id}+')'">Make Bid</button>
+
 			</td>
 		</tr>
+
+
+
 	</table>
 
-	<div id="a">
-		<a th:href="@{/logout}">Log out</a>
-	</div>
+	<input th:type="submit" value="End Bidding"/>
 
-    <br/> <br/>
+</form>
 
-	<a th:href="@{/catalog}"></a>
-	<a th:href="@{/home}"></a>
+</p>
 
-	<script th:src="@{/biddingPage.js}"></script>
 
-	<div id="a1">
 
-		<a th:href="@{/suggestAuction}">Suggest an item for sale</a>
+<div id="a">
+	<a th:href="@{/logout}">Log out</a>
+</div>
 
-	</div>
+<br/> <br/>
+
+<a th:href="@{/catalog}"></a>
+<a th:href="@{/home}"></a>
+
+<script th:src="@{/biddingPage.js}"></script>
+
+
+<div id="a1">
+
+	<a th:href="@{/suggestAuction}">Suggest an item for sale</a>
+
+</div>
+
+<div id="pay">
+	<a th:href="@{/pay}">Pay your purchases</a>
+</div>
 </body>
 </html>
